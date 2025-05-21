@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 210 100% 32%; /* AugmentedRealityRE primary blue #0055A4 */
+  --primary-foreground: 210 100% 98%;
+  --secondary: 199 100% 47%; /* AugmentedRealityRE secondary blue #00AEEF */
+  --secondary-foreground: 199 100% 98%;
+  --accent: 25 100% 50%; /* AugmentedRealityRE accent orange #FF6B00 */
+  --accent-foreground: 25 100% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --success: 120 100% 27%; /* Success green #28A745 */
+  --success-foreground: 120 100% 98%;
+  --warning: 48 100% 52%; /* Warning yellow #FFC107 */
+  --warning-foreground: 48 100% 98%;
+  --info: 187 100% 42%; /* Info blue #17A2B8 */
+  --info-foreground: 187 100% 98%;
+  --ring: 210 100% 32%;
+  --radius: 0.5rem;
+  --chart-1: 210 100% 32%;
+  --chart-2: 199 100% 47%;
+  --chart-3: 25 100% 50%;
+  --chart-4: 120 100% 27%;
+  --chart-5: 48 100% 52%;
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 20 14.3% 4.1%;
+  --sidebar-primary: 210 100% 32%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 60 4.8% 95.9%;
+  --sidebar-accent-foreground: 24 9.8% 10%;
+  --sidebar-border: 20 5.9% 90%;
+  --sidebar-ring: 20 14.3% 4.1%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 210 100% 45%; /* Slightly lighter primary in dark mode */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 199 100% 47%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 25 100% 50%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 120 62.8% 35%; /* Adjusted for dark mode */
+  --success-foreground: 0 0% 98%;
+  --warning: 48 100% 52%;
+  --warning-foreground: 0 0% 98%;
+  --info: 187 100% 42%;
+  --info-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --chart-1: 210 100% 45%;
+  --chart-2: 199 100% 60%;
+  --chart-3: 25 100% 60%;
+  --chart-4: 120 62.8% 35%;
+  --chart-5: 48 100% 60%;
+  --sidebar-background: 240 10% 3.9%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 210 100% 45%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 240 4.9% 83.9%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-gray-50 text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom styles for the application */
+.property-card:hover .property-actions {
+  opacity: 1;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dashboard-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dashboard-scrollbar::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 3px;
+}
+
+.dashboard-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+.three-d-placeholder {
+  background: linear-gradient(135deg, rgba(0,85,164,0.05) 0%, rgba(0,174,239,0.1) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.three-d-placeholder::after {
+  content: "3D Visualization";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #0055A4;
+  font-weight: 500;
+}
