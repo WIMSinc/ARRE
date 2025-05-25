@@ -23,8 +23,8 @@ interface NavItemProps {
 const NavItem = ({ icon, label, href, active }: NavItemProps) => {
   return (
     <Link href={href}>
-      <a 
-        className={`flex items-center px-4 py-3 rounded-md font-medium transition-colors ${
+      <span 
+        className={`flex items-center px-4 py-3 rounded-md font-medium transition-colors cursor-pointer ${
           active 
             ? "text-primary dark:text-primary-foreground bg-blue-50 dark:bg-primary/20" 
             : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -32,7 +32,7 @@ const NavItem = ({ icon, label, href, active }: NavItemProps) => {
       >
         {icon}
         <span>{label}</span>
-      </a>
+      </span>
     </Link>
   );
 };
