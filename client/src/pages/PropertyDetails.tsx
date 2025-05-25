@@ -20,6 +20,7 @@ import Header from "@/components/Header";
 import SidebarNavigation from "@/components/SidebarNavigation";
 import MobileNavigation from "@/components/MobileNavigation";
 import ThreeJSModelViewer from "@/components/ThreeJSModelViewer";
+import VRModelViewer from "@/components/VRModelViewer";
 import ProjectTimeline from "@/components/ProjectTimeline";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
