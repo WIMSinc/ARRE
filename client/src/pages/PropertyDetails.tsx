@@ -20,7 +20,7 @@ import Header from "@/components/Header";
 import SidebarNavigation from "@/components/SidebarNavigation";
 import MobileNavigation from "@/components/MobileNavigation";
 import ThreeJSModelViewer from "@/components/ThreeJSModelViewer";
-import VRModelViewer from "@/components/VRModelViewer";
+import VRExperience from "@/components/VRExperience";
 import ProjectTimeline from "@/components/ProjectTimeline";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -388,7 +388,7 @@ const PropertyDetails = () => {
                 <>
                   {/* VR Experience Section */}
                   <div className="mb-8">
-                    <VRModelViewer 
+                    <VRExperience 
                       propertyId={property.id} 
                       propertyName={property.name}
                     />
