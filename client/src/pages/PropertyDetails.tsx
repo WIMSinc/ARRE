@@ -21,6 +21,8 @@ import SidebarNavigation from "@/components/SidebarNavigation";
 import MobileNavigation from "@/components/MobileNavigation";
 import ThreeJSModelViewer from "@/components/ThreeJSModelViewer";
 import VRExperience from "@/components/VRExperience";
+import MobileARViewer from "@/components/MobileARViewer";
+import AppleVisionProSupport from "@/components/AppleVisionProSupport";
 import ProjectTimeline from "@/components/ProjectTimeline";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -389,6 +391,22 @@ const PropertyDetails = () => {
                   {/* VR Experience Section */}
                   <div className="mb-8">
                     <VRExperience 
+                      propertyId={property.id} 
+                      propertyName={property.name}
+                    />
+                  </div>
+                  
+                  {/* Mobile AR Experience */}
+                  <div className="mb-8">
+                    <MobileARViewer 
+                      propertyId={property.id} 
+                      propertyName={property.name}
+                    />
+                  </div>
+                  
+                  {/* Apple Vision Pro Support */}
+                  <div className="mb-8">
+                    <AppleVisionProSupport 
                       propertyId={property.id} 
                       propertyName={property.name}
                     />
