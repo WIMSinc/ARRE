@@ -385,9 +385,18 @@ const PropertyDetails = () => {
                   ))}
                 </div>
               ) : models.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {models.map((model) => (
-                    <Card key={model.id} className="border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
+                <>
+                  {/* VR Experience Section */}
+                  <div className="mb-8">
+                    <VRModelViewer 
+                      propertyId={property.id} 
+                      propertyName={property.name}
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {models.map((model) => (
+                      <Card key={model.id} className="border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
                       <div className="relative h-48">
                         <ThreeJSModelViewer 
                           modelId={model.id} 
@@ -446,6 +455,16 @@ const PropertyDetails = () => {
                       Import Model
                     </Button>
                   </div>
+                </div>
+                </>
+              ) : (
+                <div className="text-center py-8">
+                  <Axis3d className="h-10 w-10 text-gray-400 mx-auto mb-3" />
+                  <p className="text-gray-500 dark:text-gray-400 mb-4">No 3D models found for this property.</p>
+                  <Button>
+                    <Plus className="mr-1 h-4 w-4" />
+                    Create First Model
+                  </Button>
                 </div>
               )}
             </TabsContent>
