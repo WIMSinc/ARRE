@@ -20,15 +20,16 @@ const Header = () => {
   return (
     <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 py-2 px-4 flex items-center justify-between shadow-sm">
       <div className="flex items-center">
-        <div className="flex items-center space-x-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            className="h-10 w-auto fill-primary"
-          >
-            <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 17v-10l9 5-9 5z" />
-          </svg>
-          <span className="font-bold text-primary dark:text-primary text-xl">AugmentedRealityRE</span>
+        <div className="flex items-center space-x-3">
+          <img
+            src="/src/assets/ARRE Logo.png"
+            alt="ARRE Logo"
+            className="h-10 w-10 object-contain"
+          />
+          <div className="flex flex-col">
+            <span className="font-bold text-primary dark:text-primary text-xl">ARRE</span>
+            <span className="text-xs text-gray-600 dark:text-gray-400 -mt-1">Augmented Reality Real Estate</span>
+          </div>
         </div>
       </div>
 

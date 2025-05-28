@@ -13,12 +13,12 @@
   --card-foreground: 20 14.3% 4.1%;
   --border: 20 5.9% 90%;
   --input: 20 5.9% 90%;
-  --primary: 210 100% 32%; /* AugmentedRealityRE primary blue #0055A4 */
-  --primary-foreground: 210 100% 98%;
-  --secondary: 199 100% 47%; /* AugmentedRealityRE secondary blue #00AEEF */
-  --secondary-foreground: 199 100% 98%;
-  --accent: 25 100% 50%; /* AugmentedRealityRE accent orange #FF6B00 */
-  --accent-foreground: 25 100% 98%;
+  --primary: 354 70% 54%; /* ARRE primary red from logo */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 0%; /* ARRE black */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 354 70% 54%; /* ARRE accent red */
+  --accent-foreground: 0 0% 100%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 60 9.1% 97.8%;
   --success: 120 100% 27%; /* Success green #28A745 */
@@ -29,14 +29,14 @@
   --info-foreground: 187 100% 98%;
   --ring: 210 100% 32%;
   --radius: 0.5rem;
-  --chart-1: 210 100% 32%;
-  --chart-2: 199 100% 47%;
-  --chart-3: 25 100% 50%;
-  --chart-4: 120 100% 27%;
-  --chart-5: 48 100% 52%;
+  --chart-1: 354 70% 54%;
+  --chart-2: 0 0% 0%;
+  --chart-3: 0 0% 40%;
+  --chart-4: 354 50% 40%;
+  --chart-5: 0 0% 65%;
   --sidebar-background: 0 0% 100%;
-  --sidebar-foreground: 20 14.3% 4.1%;
-  --sidebar-primary: 210 100% 32%;
+  --sidebar-foreground: 0 0% 0%;
+  --sidebar-primary: 354 70% 54%;
   --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 60 4.8% 95.9%;
   --sidebar-accent-foreground: 24 9.8% 10%;
