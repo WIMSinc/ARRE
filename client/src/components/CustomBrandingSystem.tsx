@@ -44,22 +44,21 @@ interface BrandingConfig {
 const CustomBrandingSystem = () => {
   const [currentBranding, setCurrentBranding] = useState<BrandingConfig>({
     id: 'brand_001',
-    agencyName: 'Premier Commercial Realty',
-    primaryColor: '#2563eb',
-    secondaryColor: '#64748b',
-    accentColor: '#10b981',
-    logoUrl: '',
-    tagline: 'Transforming Commercial Real Estate with Innovation',
-    contactEmail: 'info@premiercommercial.com',
-    contactPhone: '(555) 123-4567',
-    website: 'www.premiercommercial.com',
-    address: '123 Business Center Drive, Suite 400, Metro City, CA 90210',
+    agencyName: 'ARRE',
+    primaryColor: '#dc4444',
+    secondaryColor: '#000000',
+    accentColor: '#dc4444',
+    logoUrl: '/src/assets/ARRE Logo.png',
+    tagline: 'Augmented Reality Real Estate - The Future of Property Visualization',
+    contactEmail: 'mike@eolianvr.com',
+    contactPhone: '305-562-9639',
+    website: 'www.arre.com',
+    address: 'Miami, FL',
     socialLinks: {
-      linkedin: 'https://linkedin.com/company/premier-commercial',
-      twitter: 'https://twitter.com/premiercommercial',
-      facebook: 'https://facebook.com/premiercommercial'
+      linkedin: 'https://linkedin.com/company/arre',
+      twitter: 'https://twitter.com/arretech'
     },
-    footerText: 'Copyright © 2024 Premier Commercial Realty. All rights reserved.',
+    footerText: 'Copyright © 2024 ARRE - Augmented Reality Real Estate. All rights reserved.',
     isActive: true
   });
 
@@ -144,18 +143,21 @@ const CustomBrandingSystem = () => {
   const resetToDefault = () => {
     setCurrentBranding({
       id: 'brand_001',
-      agencyName: 'AugmentedRealityRE',
-      primaryColor: '#2563eb',
-      secondaryColor: '#64748b',
-      accentColor: '#10b981',
-      logoUrl: '',
-      tagline: 'Commercial Real Estate Visualization Platform',
-      contactEmail: 'info@augmentedrealityre.com',
-      contactPhone: '(555) 123-4567',
-      website: 'www.augmentedrealityre.com',
-      address: '123 Innovation Drive, Tech City, CA 90210',
-      socialLinks: {},
-      footerText: 'Copyright © 2024 AugmentedRealityRE. All rights reserved.',
+      agencyName: 'ARRE',
+      primaryColor: '#dc4444',
+      secondaryColor: '#000000',
+      accentColor: '#dc4444',
+      logoUrl: '/src/assets/ARRE Logo.png',
+      tagline: 'Augmented Reality Real Estate - The Future of Property Visualization',
+      contactEmail: 'mike@eolianvr.com',
+      contactPhone: '305-562-9639',
+      website: 'www.arre.com',
+      address: 'Miami, FL',
+      socialLinks: {
+        linkedin: 'https://linkedin.com/company/arre',
+        twitter: 'https://twitter.com/arretech'
+      },
+      footerText: 'Copyright © 2024 ARRE - Augmented Reality Real Estate. All rights reserved.',
       isActive: true
     });
   };

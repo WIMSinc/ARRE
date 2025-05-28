@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "wouter";
 import { Sun, Moon, Settings, Bell, HelpCircle, LogOut } from "lucide-react";
+import ARRELogo from "@/assets/ARRE Logo.png";
 
 const Header = () => {
   const { user, logout } = useUser();
@@ -22,7 +23,7 @@ const Header = () => {
       <div className="flex items-center">
         <div className="flex items-center space-x-3">
           <img
-            src="/src/assets/ARRE Logo.png"
+            src={ARRELogo}
             alt="ARRE Logo"
             className="h-10 w-10 object-contain"
           />
