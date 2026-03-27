@@ -99,14 +99,14 @@ const Properties = () => {
               </div>
               
               <div className="flex gap-2">
-                <Select value={propertyType || ""} onValueChange={setPropertyType}>
+                <Select value={propertyType || "all"} onValueChange={(v) => setPropertyType(v === "all" ? "" : v)}>
                   <SelectTrigger className="w-[160px]">
                     <SelectValue placeholder="Property Type" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Property Type</SelectLabel>
-                      <SelectItem value="">All Types</SelectItem>
+                      <SelectItem value="all">All Types</SelectItem>
                       <SelectItem value="Office">Office</SelectItem>
                       <SelectItem value="Retail">Retail</SelectItem>
                       <SelectItem value="Mixed-Use">Mixed-Use</SelectItem>
@@ -114,14 +114,14 @@ const Properties = () => {
                   </SelectContent>
                 </Select>
                 
-                <Select value={sortBy || ""} onValueChange={setSortBy}>
+                <Select value={sortBy || "recent"} onValueChange={(v) => setSortBy(v === "recent" ? "" : v)}>
                   <SelectTrigger className="w-[160px]">
                     <SelectValue placeholder="Sort By" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Sort By</SelectLabel>
-                      <SelectItem value="">Most Recent</SelectItem>
+                      <SelectItem value="recent">Most Recent</SelectItem>
                       <SelectItem value="name-asc">Name A-Z</SelectItem>
                       <SelectItem value="name-desc">Name Z-A</SelectItem>
                       <SelectItem value="size-desc">Size (Largest)</SelectItem>

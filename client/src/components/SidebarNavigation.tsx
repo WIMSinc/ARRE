@@ -112,7 +112,7 @@ const SidebarNavigation = () => {
                   recentProperties.map((property) => (
                     <li key={property.id}>
                       <Link href={`/properties/${property.id}`}>
-                        <a className="flex items-center py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-foreground">
+                        <span className="flex items-center py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-foreground cursor-pointer">
                           <div className={`w-2 h-2 ${
                             property.status === 'active' 
                               ? 'bg-success' 
@@ -121,7 +121,7 @@ const SidebarNavigation = () => {
                                 : 'bg-primary'
                           } rounded-full mr-2`}></div>
                           {property.name}
-                        </a>
+                        </span>
                       </Link>
                     </li>
                   ))
