@@ -9,6 +9,15 @@ import Properties from "@/pages/Properties";
 import Projects from "@/pages/Projects";
 import Models from "@/pages/Models";
 import PropertyDetails from "@/pages/PropertyDetails";
+import LeadCRM from "@/pages/LeadCRM";
+import DealPipeline from "@/pages/DealPipeline";
+import OfferManagement from "@/pages/OfferManagement";
+import DocumentVault from "@/pages/DocumentVault";
+import LiveOpenHouse from "@/pages/LiveOpenHouse";
+import CalendarIntegration from "@/pages/CalendarIntegration";
+import SubscriptionBilling from "@/pages/SubscriptionBilling";
+import MarketData from "@/pages/MarketData";
+import AutomatedReports from "@/pages/AutomatedReports";
 import { UserProvider } from "@/context/UserContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 
@@ -20,6 +29,15 @@ function Router() {
       <Route path="/properties/:id" component={PropertyDetails} />
       <Route path="/projects" component={Projects} />
       <Route path="/models" component={Models} />
+      <Route path="/leads" component={LeadCRM} />
+      <Route path="/deals" component={DealPipeline} />
+      <Route path="/offers" component={OfferManagement} />
+      <Route path="/documents" component={DocumentVault} />
+      <Route path="/open-houses" component={LiveOpenHouse} />
+      <Route path="/calendar" component={CalendarIntegration} />
+      <Route path="/subscription" component={SubscriptionBilling} />
+      <Route path="/market-data" component={MarketData} />
+      <Route path="/reports" component={AutomatedReports} />
       <Route component={NotFound} />
     </Switch>
   );

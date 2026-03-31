@@ -3,12 +3,11 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import { 
-  insertUserSchema, 
-  insertPropertySchema, 
-  insertProjectSchema, 
-  insertModelSchema, 
-  insertTeamMemberSchema, 
-  insertTimelineEventSchema 
+  insertUserSchema, insertPropertySchema, insertProjectSchema,
+  insertModelSchema, insertTeamMemberSchema, insertTimelineEventSchema,
+  insertLeadSchema, insertDealSchema, insertOfferSchema, insertDocumentSchema,
+  insertOpenHouseSessionSchema, insertSubscriptionSchema,
+  insertCalendarEventSchema, insertTourAnnotationSchema
 } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -433,10 +432,299 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.status(204).end();
   });
 
+  // Lead (CRM) routes
+  apiRouter.get("/leads", async (req, res) => {
+    const userId = 1;
+    const leads = await storage.getLeads(userId);
+    res.json(leads);
+  });
+
+  apiRouter.get("/leads/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    const lead = await storage.getLead(id);
+    if (!lead) return res.status(404).json({ message: "Lead not found" });
+    res.json(lead);
+  });
+
+  apiRouter.post("/leads", async (req, res) => {
+    try {
+      const data = insertLeadSchema.parse({ ...req.body, userId: 1 });
+      const lead = await storage.createLead(data);
+      res.status(201).json(lead);
+    } catch (error) {
+      if (error instanceof z.ZodError) return res.status(400).json({ message: error.errors });
+      res.status(500).json({ message: "Failed to create lead" });
+    }
+  });
+
+  apiRouter.patch("/leads/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    try {
+      const updated = await storage.updateLead(id, req.body);
+      if (!updated) return res.status(404).json({ message: "Lead not found" });
+      res.json(updated);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update lead" });
+    }
+  });
+
+  apiRouter.delete("/leads/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    const success = await storage.deleteLead(id);
+    if (!success) return res.status(404).json({ message: "Lead not found" });
+    res.status(204).end();
+  });
+
+  // Deal routes
+  apiRouter.get("/deals", async (req, res) => {
+    const userId = 1;
+    const deals = await storage.getDeals(userId);
+    res.json(deals);
+  });
+
+  apiRouter.post("/deals", async (req, res) => {
+    try {
+      const data = insertDealSchema.parse({ ...req.body, userId: 1 });
+      const deal = await storage.createDeal(data);
+      res.status(201).json(deal);
+    } catch (error) {
+      if (error instanceof z.ZodError) return res.status(400).json({ message: error.errors });
+      res.status(500).json({ message: "Failed to create deal" });
+    }
+  });
+
+  apiRouter.patch("/deals/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    try {
+      const updated = await storage.updateDeal(id, req.body);
+      if (!updated) return res.status(404).json({ message: "Deal not found" });
+      res.json(updated);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update deal" });
+    }
+  });
+
+  apiRouter.delete("/deals/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    const success = await storage.deleteDeal(id);
+    if (!success) return res.status(404).json({ message: "Deal not found" });
+    res.status(204).end();
+  });
+
+  // Offer routes
+  apiRouter.get("/offers", async (req, res) => {
+    const userId = 1;
+    const propertyId = req.query.propertyId ? parseInt(req.query.propertyId as string) : undefined;
+    const result = propertyId ? await storage.getOffersByPropertyId(propertyId) : await storage.getOffers(userId);
+    res.json(result);
+  });
+
+  apiRouter.post("/offers", async (req, res) => {
+    try {
+      const data = insertOfferSchema.parse({ ...req.body, userId: 1 });
+      const offer = await storage.createOffer(data);
+      res.status(201).json(offer);
+    } catch (error) {
+      if (error instanceof z.ZodError) return res.status(400).json({ message: error.errors });
+      res.status(500).json({ message: "Failed to create offer" });
+    }
+  });
+
+  apiRouter.patch("/offers/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    try {
+      const updated = await storage.updateOffer(id, req.body);
+      if (!updated) return res.status(404).json({ message: "Offer not found" });
+      res.json(updated);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update offer" });
+    }
+  });
+
+  apiRouter.delete("/offers/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    const success = await storage.deleteOffer(id);
+    if (!success) return res.status(404).json({ message: "Offer not found" });
+    res.status(204).end();
+  });
+
+  // Document routes
+  apiRouter.get("/documents", async (req, res) => {
+    const userId = 1;
+    const propertyId = req.query.propertyId ? parseInt(req.query.propertyId as string) : undefined;
+    const result = propertyId ? await storage.getDocumentsByPropertyId(propertyId) : await storage.getDocuments(userId);
+    res.json(result);
+  });
+
+  apiRouter.post("/documents", async (req, res) => {
+    try {
+      const data = insertDocumentSchema.parse({ ...req.body, userId: 1 });
+      const doc = await storage.createDocument(data);
+      res.status(201).json(doc);
+    } catch (error) {
+      if (error instanceof z.ZodError) return res.status(400).json({ message: error.errors });
+      res.status(500).json({ message: "Failed to create document" });
+    }
+  });
+
+  apiRouter.patch("/documents/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    try {
+      const updated = await storage.updateDocument(id, req.body);
+      if (!updated) return res.status(404).json({ message: "Document not found" });
+      res.json(updated);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update document" });
+    }
+  });
+
+  apiRouter.delete("/documents/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    const success = await storage.deleteDocument(id);
+    if (!success) return res.status(404).json({ message: "Document not found" });
+    res.status(204).end();
+  });
+
+  // Open House Session routes
+  apiRouter.get("/open-house-sessions", async (req, res) => {
+    const userId = 1;
+    const sessions = await storage.getOpenHouseSessions(userId);
+    res.json(sessions);
+  });
+
+  apiRouter.get("/open-house-sessions/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    const session = await storage.getOpenHouseSession(id);
+    if (!session) return res.status(404).json({ message: "Session not found" });
+    res.json(session);
+  });
+
+  apiRouter.post("/open-house-sessions", async (req, res) => {
+    try {
+      const data = insertOpenHouseSessionSchema.parse({ ...req.body, hostId: 1 });
+      const session = await storage.createOpenHouseSession(data);
+      res.status(201).json(session);
+    } catch (error) {
+      if (error instanceof z.ZodError) return res.status(400).json({ message: error.errors });
+      res.status(500).json({ message: "Failed to create session" });
+    }
+  });
+
+  apiRouter.patch("/open-house-sessions/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    try {
+      const updated = await storage.updateOpenHouseSession(id, req.body);
+      if (!updated) return res.status(404).json({ message: "Session not found" });
+      res.json(updated);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update session" });
+    }
+  });
+
+  apiRouter.delete("/open-house-sessions/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    const success = await storage.deleteOpenHouseSession(id);
+    if (!success) return res.status(404).json({ message: "Session not found" });
+    res.status(204).end();
+  });
+
+  // Subscription routes
+  apiRouter.get("/subscription", async (req, res) => {
+    const userId = 1;
+    const sub = await storage.getSubscription(userId);
+    res.json(sub || null);
+  });
+
+  apiRouter.patch("/subscription", async (req, res) => {
+    const userId = 1;
+    try {
+      const updated = await storage.updateSubscription(userId, req.body);
+      res.json(updated);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update subscription" });
+    }
+  });
+
+  // Calendar event routes
+  apiRouter.get("/calendar-events", async (req, res) => {
+    const userId = 1;
+    const events = await storage.getCalendarEvents(userId);
+    res.json(events);
+  });
+
+  apiRouter.post("/calendar-events", async (req, res) => {
+    try {
+      const data = insertCalendarEventSchema.parse({ ...req.body, userId: 1 });
+      const event = await storage.createCalendarEvent(data);
+      res.status(201).json(event);
+    } catch (error) {
+      if (error instanceof z.ZodError) return res.status(400).json({ message: error.errors });
+      res.status(500).json({ message: "Failed to create calendar event" });
+    }
+  });
+
+  apiRouter.patch("/calendar-events/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    try {
+      const updated = await storage.updateCalendarEvent(id, req.body);
+      if (!updated) return res.status(404).json({ message: "Event not found" });
+      res.json(updated);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update event" });
+    }
+  });
+
+  apiRouter.delete("/calendar-events/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    const success = await storage.deleteCalendarEvent(id);
+    if (!success) return res.status(404).json({ message: "Event not found" });
+    res.status(204).end();
+  });
+
+  // Tour annotation routes
+  apiRouter.get("/tour-annotations", async (req, res) => {
+    const propertyId = req.query.propertyId ? parseInt(req.query.propertyId as string) : undefined;
+    if (!propertyId) return res.status(400).json({ message: "Property ID required" });
+    const annotations = await storage.getTourAnnotations(propertyId);
+    res.json(annotations);
+  });
+
+  apiRouter.post("/tour-annotations", async (req, res) => {
+    try {
+      const data = insertTourAnnotationSchema.parse({ ...req.body, userId: 1 });
+      const annotation = await storage.createTourAnnotation(data);
+      res.status(201).json(annotation);
+    } catch (error) {
+      if (error instanceof z.ZodError) return res.status(400).json({ message: error.errors });
+      res.status(500).json({ message: "Failed to create annotation" });
+    }
+  });
+
+  apiRouter.delete("/tour-annotations/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ message: "Invalid ID" });
+    const success = await storage.deleteTourAnnotation(id);
+    if (!success) return res.status(404).json({ message: "Annotation not found" });
+    res.status(204).end();
+  });
+
   // Stats route
   apiRouter.get("/stats", async (req, res) => {
-    // In a real app, we'd get userId from the auth token
-    const userId = 1; // Demo user ID
+    const userId = 1;
     const stats = await storage.getStats(userId);
     res.json(stats);
   });

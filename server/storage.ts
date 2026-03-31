@@ -17,6 +17,22 @@ import {
   type InsertTeamMember,
   type TimelineEvent,
   type InsertTimelineEvent,
+  type Lead,
+  type InsertLead,
+  type Deal,
+  type InsertDeal,
+  type Offer,
+  type InsertOffer,
+  type Document,
+  type InsertDocument,
+  type OpenHouseSession,
+  type InsertOpenHouseSession,
+  type Subscription,
+  type InsertSubscription,
+  type CalendarEvent,
+  type InsertCalendarEvent,
+  type TourAnnotation,
+  type InsertTourAnnotation,
   type Stats,
 } from "@shared/schema";
 
@@ -61,6 +77,57 @@ export interface IStorage {
   createTimelineEvent(event: InsertTimelineEvent): Promise<TimelineEvent>;
   updateTimelineEvent(id: number, event: Partial<TimelineEvent>): Promise<TimelineEvent | undefined>;
   deleteTimelineEvent(id: number): Promise<boolean>;
+
+  // Lead (CRM) operations
+  getLeads(userId: number): Promise<Lead[]>;
+  getLead(id: number): Promise<Lead | undefined>;
+  createLead(lead: InsertLead): Promise<Lead>;
+  updateLead(id: number, lead: Partial<Lead>): Promise<Lead | undefined>;
+  deleteLead(id: number): Promise<boolean>;
+
+  // Deal operations
+  getDeals(userId: number): Promise<Deal[]>;
+  getDeal(id: number): Promise<Deal | undefined>;
+  createDeal(deal: InsertDeal): Promise<Deal>;
+  updateDeal(id: number, deal: Partial<Deal>): Promise<Deal | undefined>;
+  deleteDeal(id: number): Promise<boolean>;
+
+  // Offer operations
+  getOffers(userId: number): Promise<Offer[]>;
+  getOffersByPropertyId(propertyId: number): Promise<Offer[]>;
+  createOffer(offer: InsertOffer): Promise<Offer>;
+  updateOffer(id: number, offer: Partial<Offer>): Promise<Offer | undefined>;
+  deleteOffer(id: number): Promise<boolean>;
+
+  // Document operations
+  getDocuments(userId: number): Promise<Document[]>;
+  getDocumentsByPropertyId(propertyId: number): Promise<Document[]>;
+  createDocument(doc: InsertDocument): Promise<Document>;
+  updateDocument(id: number, doc: Partial<Document>): Promise<Document | undefined>;
+  deleteDocument(id: number): Promise<boolean>;
+
+  // Open House Session operations
+  getOpenHouseSessions(userId: number): Promise<OpenHouseSession[]>;
+  getOpenHouseSession(id: number): Promise<OpenHouseSession | undefined>;
+  createOpenHouseSession(session: InsertOpenHouseSession): Promise<OpenHouseSession>;
+  updateOpenHouseSession(id: number, session: Partial<OpenHouseSession>): Promise<OpenHouseSession | undefined>;
+  deleteOpenHouseSession(id: number): Promise<boolean>;
+
+  // Subscription operations
+  getSubscription(userId: number): Promise<Subscription | undefined>;
+  createSubscription(sub: InsertSubscription): Promise<Subscription>;
+  updateSubscription(userId: number, sub: Partial<Subscription>): Promise<Subscription | undefined>;
+
+  // Calendar event operations
+  getCalendarEvents(userId: number): Promise<CalendarEvent[]>;
+  createCalendarEvent(event: InsertCalendarEvent): Promise<CalendarEvent>;
+  updateCalendarEvent(id: number, event: Partial<CalendarEvent>): Promise<CalendarEvent | undefined>;
+  deleteCalendarEvent(id: number): Promise<boolean>;
+
+  // Tour annotation operations
+  getTourAnnotations(propertyId: number): Promise<TourAnnotation[]>;
+  createTourAnnotation(annotation: InsertTourAnnotation): Promise<TourAnnotation>;
+  deleteTourAnnotation(id: number): Promise<boolean>;
 
   // Stats
   getStats(userId: number): Promise<Stats>;
